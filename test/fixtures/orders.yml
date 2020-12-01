@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  id_order: 
+  id_store: 1
+  total: 1
+
+two:
+  id_order: 
+  id_store: 1
+  total: 1
