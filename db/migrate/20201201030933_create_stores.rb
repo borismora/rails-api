@@ -9,5 +9,6 @@ class CreateStores < ActiveRecord::Migration[5.1]
     end
 
     execute "ALTER TABLE ONLY stores ADD PRIMARY KEY (id_store);"
+    execute "ALTER TABLE ONLY public.stores ALTER COLUMN email SET DEFAULT 'francisco.abalan@pjchile.com';"
   end
 end

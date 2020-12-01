@@ -3,7 +3,7 @@ module Api
         class ProductController < ApplicationController
 
             def index
-                products = Product.order('sku ASC');
+                products = Product.order('id_product DESC');
                 render json: products
             end
 

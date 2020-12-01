@@ -41,7 +41,7 @@ ActiveRecord::Schema.define(version: 20201201031013) do
   create_table "stores", primary_key: "id_store", id: :serial, force: :cascade do |t|
     t.string "name"
     t.text "address"
-    t.string "email"
+    t.string "email", default: "francisco.abalan@pjchile.com"
     t.string "phone"
   end
 
