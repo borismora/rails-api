@@ -27,7 +27,7 @@ ActiveRecord::Schema.define(version: 20201201031013) do
   end
 
   create_table "products", primary_key: "id_product", id: :serial, force: :cascade do |t|
-    t.serial "sku", null: false
+    t.string "sku"
     t.string "name"
     t.string "typee"
     t.integer "price"

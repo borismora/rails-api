@@ -2,7 +2,7 @@ class CreateProducts < ActiveRecord::Migration[5.1]
   def change
     create_table :products, :id => false do |t|
       t.serial :id_product
-      t.serial :sku
+      t.string :sku
       t.string :name
       t.string :typee
       t.integer :price
