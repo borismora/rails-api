@@ -5,7 +5,7 @@ default: &default
   pool: 5
   timeout: 5000
   user: postgres
-  password: super2020
+  password: 
 
 development:
   <<: *default
@@ -18,5 +18,5 @@ test:
 production:
   database: pizza
   username: pizza
-  password: pizza2020
+  password: 
   
