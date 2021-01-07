@@ -1,11 +1,11 @@
 module Orders
-    class CreateWithDetail
+    class CreateOrder
         include Interactor
 
         delegate :params, to: :context
 
         def call
-            order = Order.new({id_store: params[:id_store], total: 0});
+            order = Order.create({id_store: params[:id_store], total: 0});
             total = 0
 
             if order.save
@@ -15,18 +15,7 @@ module Orders
                     order_detail = OrderDetail.new({id_order: order[:id_order], id_product: prod[:id_product], quantity: prod[:quantity]});
                     order_detail.save
                 end
-
-                if order.update_attributes({id_store: order_params[:id_store], total: total})
-                    context.detail = GetOrderDetail.new( order[:id_order] ).details
-                end
             end
         end
-
-        private
-
-            # validate parameters
-            def order_params
-                params.permit(:id_store, :detalle)
-            end
     end
 end

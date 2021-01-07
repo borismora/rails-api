@@ -10,27 +10,22 @@ module Api
 
             # shows the searched order and its details
             def show
-                order = Order.find(params[:id]);
-                order_detail = OrderDetail.where(:id_order => params[:id])
-                details = []
-
-                order_detail.each do |detail|
-                    product = Product.find(detail[:id_product]);
-                    details.push({id_product: detail[:id_product], name: product[:name], type: product[:typee], quantity: detail[:quantity], price: product[:price], sub_total: product[:price] * detail[:quantity]})
-                end
-                
-                render json: {order: order, orderDetails: details}
-            end
-
-            # create a new order
-            def create
-                result = Orders::CreateWithDetail.call(params: params)
+                result = Orders::ShowOrder.call(params: params)
                 if result.success?
                     render json: result.detail, status: :created
                 else
                     render json: {error: result.errors}
                 end
-                
+            end
+
+            # create a new order
+            def create
+                result = Orders::OrganizerCreateOrder.call(params: params)
+                if result.success?
+                    render json: result.detail, status: :created
+                else
+                    render json: {error: result.errors}
+                end
             end
 
             # delete order
