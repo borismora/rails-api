@@ -1,28 +1,31 @@
 class GetOrderDetail
-    def initialize(id_order)
-        @id_order = id_order;
+    def initialize(params)
+        @params = params;
     end
 
-    delegate :id_order, to: :context
+    delegate :params, to: :context
 
     def details
         item_details
     end
 
     def item_details
-        OrderDetail.where(:id_order => id_order).map { |item| add_item(Product.find(item[:id_product]), item) }
+        total = 0
+        params[:detalle].each do |prod|
+            product = Product.find(prod[:id_product]);
+            total += product[:price] * prod[:quantity]
+            order_detail = OrderDetail.new(add_item(prod, params[:order]));
+            order_detail.save
+        end
     end
 
-    def add_item(product, detail)
+    def add_item(prod, order)
         {
-            id_product: detail[:id_product], 
-            name: product[:name], 
-            type: product[:typee], 
-            quantity: detail[:quantity], 
-            price: product[:price], 
-            sub_total: product[:price] * detail[:quantity]
+            id_order: order[:id_order], 
+            id_product: prod[:id_product], 
+            quantity: prod[:quantity]
         }
     end
 
-    attr_accessor :id_order
+    attr_accessor :params
 end
