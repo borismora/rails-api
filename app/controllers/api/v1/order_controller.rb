@@ -24,24 +24,11 @@ module Api
 
             # create a new order
             def create
-                order = Order.new({id_store: order_params[:id_store], total: 0});
-                total = 0
-
-                if order.save
-                    params[:detalle].each do |prod|
-                        product = Product.find(prod[:id_product]);
-                        total += product[:price] * prod[:quantity]
-                        order_detail = OrderDetail.new({id_order: order[:id_order], id_product: prod[:id_product], quantity: prod[:quantity]});
-                        order_detail.save
-                    end
-
-                    if order.update_attributes({id_store: order_params[:id_store], total: total})
-                        render json: {response: "order and details successfully created", data: order, detail: params[:detalle]},status: :ok
-                    else
-                        render json: {response: "error creating order and details", data: order.errors},status: :unprocessable_entity
-                    end
+                result = Orders::CreateWithDetail.call(params: params)
+                if result.success?
+                    render json: result.detail, status: :created
                 else
-                    render json: {response: "error creating order and details", data: order.errors},status: :unprocessable_entity
+                    render json: {error: result.errors}
                 end
                 
             end
