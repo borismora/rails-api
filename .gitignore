@@ -15,4 +15,9 @@
 
 .byebug_history
 
+./config/environments/*
+./config/database.yml
+config/environments/*
+config/database.yml
 /config/environments/*
+/config/database.yml
