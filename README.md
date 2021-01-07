@@ -1,24 +1,44 @@
-# README
+# rails-api
+Api básica en Ruby On Rails con Postgresql
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Probar api en heroku: https://rails-api-pizza.herokuapp.com
 
-Things you may want to cover:
+Ejemplos:
 
-* Ruby version
+- GET https://rails-api-pizza.herokuapp.com/api/v1/store para obtener todas las tiendas
 
-* System dependencies
+- POST https://rails-api-pizza.herokuapp.com/api/v1/order para crear nueva orden y sus detalles
+```javascript
+{ 
+  "headers": {
+      "Content-Type": "application/json"
+   }, 
+   "body": {
+      "id_store": 1,
+      "detalle": [
+          {
+              "id_product": 1,
+              "quantity": 2
+          },
+          {
+              "id_product": 3,
+              "quantity": 1
+          }
+      ]
+   } 
+}
+```
 
-* Configuration
+## Instalación
+- Instalar todas las dependencias
+```ruby
+bundler install
+```
 
-* Database creation
+- Configurar base de datos en config/database.yml
 
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+## Ejecutar servidor de pruebas
+- Iniciar servidor
+```ruby
+rails server
+```
